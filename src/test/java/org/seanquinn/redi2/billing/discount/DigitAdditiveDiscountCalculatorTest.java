@@ -24,6 +24,7 @@
 package org.seanquinn.redi2.billing.discount;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -40,7 +41,8 @@ public class DigitAdditiveDiscountCalculatorTest {
 
 		final DiscountCalculator calculator = new DigitAdditiveDiscountCalculator();
 		final BigDecimal actual = calculator.calculateDiscount(engagement);
+		final BigDecimal expected = new BigDecimal(4.0);
 
-		Assert.assertThat(actual, Matchers.is(new BigDecimal(4.0)));
+		Assert.assertThat(actual, Matchers.is(expected.setScale(2, RoundingMode.HALF_UP)));
 	}
 }
